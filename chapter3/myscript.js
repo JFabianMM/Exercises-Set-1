@@ -9,38 +9,30 @@
 
 // Estimated Time: 2 hrs
 
-
-function setNewParameters(a='rgb(131, 17, 0)',b='rgb(0, 97, 255)',c='60px') {    // The function has defined default values
-  document.getElementById("container").style.backgroundColor=`${a}`;
-  document.getElementById("container").style.color=`${b}`;
-  document.getElementById('container').style.fontSize = c; 
-  }
+function setValues(e){      // This is the function that access the values with this.style.backgroundColor, etc.
+  let ba1= document.getElementById("back").value;     // Read the values at the input (background)
+  let te1= document.getElementById("text").value;     // Read the values at the input (text color)
+  let si1= document.getElementById("size").value;     // Read the values at the input (text size)
   
-
-function myFunction() {
-  let ba= document.getElementById("back").value;
-  let te= document.getElementById("text").value; 
-  let si= document.getElementById("size").value;
-  si = si.toString();
-  si = si + "px";
-  setNewParameters(ba, te, si)      // If the function lacks of parameters, it has default values
-}
-
-function getValues(e){      /// This is the function that access the values with this.style.backgroundColor, etc.
-  let ba=this.style.backgroundColor;
-  let te=this.style.color;
-  let si=this.style.fontSize; 
-
-  si = si.toString();
-  
-  document.getElementById("p1").innerHTML =`Background color: ${ba}`;
-  document.getElementById("p2").innerHTML =`Text color: ${te}`;
-  document.getElementById("p3").innerHTML =`Text size: ${si}`;
+  si1= Number(si1);       // Get the size un number type
+  if (si1<=0){            // Detects if the value is acceptable
+       si1=20;            // If the value is not defined or negative size the defaul size is applyed in px
+    }
+  si1 = si1.toString();   
+  si1 = si1 + "px";
+  // Utilize the format this to assign the values
+  this.style.backgroundColor=`${ba1}`;   // Assigns the background color to the element
+  this.style.color=`${te1}`;             // Assigns the text color to the element
+  this.style.fontSize = `${si1}`;        // Assigns the text size to the element
+   
+  document.getElementById("p1").innerHTML =`Background color: ${ba1}`;    // Display the value on text
+  document.getElementById("p2").innerHTML =`Text color: ${te1}`;          // Display the value on text
+  document.getElementById("p3").innerHTML =`Text size: ${si1}`;           // Display the value on text
 }
 
 var element = document.getElementById("container");
 
 // Add a click listener to show the element value
-element.addEventListener('click', getValues, false);
+element.addEventListener('click', setValues, false);
 
 
